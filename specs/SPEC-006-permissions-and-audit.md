@@ -1,50 +1,60 @@
 ## SPEC-006 — Permissions and Audit
-*version: 1.0 | status: draft | owner: alice | date: 2026-05-11*
+*version: 0.1 | status: draft | owner: alice | date: 2026-05-11*
 
 ---
 
 ## 1. Problem
-LLM agents need explicit permission boundaries and auditable behavior, especially when multiple humans and agents are involved.
+Without clear permission boundaries, agent systems can overreach, modify state unsafely, or leave unclear responsibility for changes. Without audit structures, teams cannot reconstruct why behavior changed.
 
 ---
 
 ## 2. Goal
-Define read/write modes, audit rules, and traceability expectations for harnessed agents.
+Define permission modes and audit expectations for versioned agent harnesses.
 
 ---
 
 ## 3. Scope
 **In scope**
-- Read-only mode
-- Write-capable mode
-- Commit discipline
-- Changelogs
-- Turn logs
-- Acknowledgement flows
+- Harness modes
+- Read/write separation
+- Admin role boundaries
+- Git-based audit trail
+- Changelog expectations
+- Turn-level audit guidance
 
 **Out of scope**
-- Full sandbox implementation
-- Security certification
-- Identity provider integration
+- OS sandboxing
+- Credential management systems
+- Secret storage design
+- Enterprise compliance frameworks
 
 ---
 
 ## 4. Design / Approach
-Permission modes:
+A harness should make it obvious what an agent is allowed to do and how its actions can be reviewed later.
 
-| Mode | Meaning |
-|------|---------|
-| read-only | Can inspect and reason, cannot modify |
-| draft-only | Can produce copy-paste drafts, cannot write |
-| write-capable | Can modify repo files within rules |
-| admin | Can modify harness definitions and permissions |
+### Permission modes
+Recommended harness modes:
+- `read-only`
+- `draft-only`
+- `write-capable`
+- `admin`
 
-Audit expectations:
-- Every harness file includes version and changelog.
-- Every spec includes status and changelog.
-- Every write-capable turn should produce a clear commit.
-- Important state changes should update memory or bulletin surfaces.
-- Read-only agents should verbally acknowledge reviewed bulletin entries.
+### Mode semantics
+- **read-only** — may inspect, analyze, and propose, but never mutate files or canonical memory
+- **draft-only** — may draft outputs for approval but not commit final changes
+- **write-capable** — may create/update approved files within role boundaries
+- **admin** — may modify harness definitions, repo structure, permissions, and control surfaces
+
+### Audit expectations
+- All significant file changes should be committed through Git.
+- Harness, spec, and skill files should include changelogs.
+- Shared memory updates should be attributable to the memory steward.
+- Important decisions should be surfaced through a bulletin or durable note.
+- Turn logs may be stored for high-audit environments.
+
+### Human review
+The harness model assumes humans remain responsible for policy and approval boundaries, especially for admin changes and architecture shifts.
 
 ---
 
@@ -52,9 +62,10 @@ Audit expectations:
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| T-001 | Define permission mode schema | alice | pending |
-| T-002 | Define audit checklist | alice | pending |
-| T-003 | Define write-capable turn rules | alice | pending |
+| T-001 | Define permission modes | alice | done |
+| T-002 | Document mode semantics | alice | done |
+| T-003 | Define audit expectations | alice | done |
+| T-004 | Add turn-log example later | alice | pending |
 
 ---
 
@@ -62,7 +73,8 @@ Audit expectations:
 
 | # | Question | Owner | Resolved |
 |---|----------|-------|----------|
-| Q-001 | Should admin harnesses be separated into a different repo? | jared | no |
+| Q-001 | Should admin actions require explicit dual approval later? | jared | no |
+| Q-002 | Should audit severity levels be standardized? | jared | no |
 
 ---
 
@@ -70,4 +82,4 @@ Audit expectations:
 
 | Version | Date | Change |
 |---------|------|--------|
-| 1.0 | 2026-05-11 | Initial draft |
+| 0.1 | 2026-05-11 | Initial draft |

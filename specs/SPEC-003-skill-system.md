@@ -1,58 +1,82 @@
 ## SPEC-003 — Skill System
-*version: 1.0 | status: draft | owner: alice | date: 2026-05-11*
+*version: 0.1 | status: draft | owner: alice | date: 2026-05-11*
 
 ---
 
 ## 1. Problem
-Large boot prompts become bloated when every possible behavior is loaded at startup.
+Skills are often mixed into prompts as long static instructions, making them hard to reuse, audit, version, or selectively load.
 
 ---
 
 ## 2. Goal
-Define a lazy-loaded skill system for LLM harnesses.
+Define a reusable, lazy-loadable skill system for agent harnesses using human-readable Markdown with machine-readable frontmatter.
 
 ---
 
 ## 3. Scope
 **In scope**
-- Skill file anatomy
-- Skill triggers
-- Skill metadata
-- Skill output defaults
-- Skill unloading guidance
+- Skill file format
+- YAML frontmatter contract
+- Trigger model
+- Output model
+- Lazy-loading rules
+- Skill auditing guidance
 
 **Out of scope**
-- Automatic runtime loading implementation
-- Model-specific tool calling
+- Tool-specific adapters
+- Skill execution engine internals
+- Model fine-tuning
 
 ---
 
 ## 4. Design / Approach
-A skill is a focused instruction module loaded only when relevant.
+A skill is a composable capability module that an agent loads only when relevant to a task.
 
-Example triggers:
+### Skill format
+Every skill is a Markdown file with required YAML frontmatter.
 
-| Task Type | Skill |
-|-----------|-------|
-| Write a spec | spec-writing.skill.md |
-| Review code | code-review.skill.md |
-| Route a task | routing.skill.md |
-
-Skill anatomy:
-
-```text
-# Skill: [Name]
-
-_version: X.Y | status: draft | owner: agent-id_
-
-## Purpose
-## Trigger Conditions
-## Inputs
-## Procedure
-## Output Format
-## Quality Checks
-## Changelog
+```yaml
+---
+id: code-review
+version: 0.1
+status: draft
+owner: alice
+triggers:
+  - review code
+  - inspect diff
+outputs:
+  - review-report
+---
 ```
+
+### Required frontmatter fields
+- `id`
+- `version`
+- `status`
+- `triggers`
+
+### Recommended frontmatter fields
+- `owner`
+- `outputs`
+- `quality_checks`
+
+### Skill body sections
+A skill body should usually contain:
+1. Purpose
+2. Trigger Conditions
+3. Procedure
+4. Output Format
+5. Quality Checks
+6. Changelog
+
+### Lazy-loading rules
+- Skills should not be loaded by default unless required by the harness.
+- Trigger phrases are advisory hints, not the only invocation method.
+- Agents may load a skill due to explicit user request, routing rules, or recognized task shape.
+- Large skill libraries should remain modular to reduce context bloat.
+
+### Auditability
+Because skills are plain Markdown with frontmatter, changes are diffable, reviewable, and attributable to a human or agent owner.
 
 ---
 
@@ -60,10 +84,10 @@ _version: X.Y | status: draft | owner: agent-id_
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| T-001 | Define skill metadata schema | alice | pending |
-| T-002 | Create spec-writing skill | alice | pending |
-| T-003 | Create code-review skill | alice | pending |
-| T-004 | Create routing skill | alice | pending |
+| T-001 | Standardize required frontmatter fields | alice | done |
+| T-002 | Define body structure guidance | alice | done |
+| T-003 | Clarify lazy-load behavior | alice | done |
+| T-004 | Add skill quality rubric later | alice | pending |
 
 ---
 
@@ -71,7 +95,8 @@ _version: X.Y | status: draft | owner: agent-id_
 
 | # | Question | Owner | Resolved |
 |---|----------|-------|----------|
-| Q-001 | Should skills be composable? | jared | no |
+| Q-001 | Should skills support imports / composition later? | jared | no |
+| Q-002 | Should trigger matching stay natural-language only? | jared | no |
 
 ---
 
@@ -79,4 +104,4 @@ _version: X.Y | status: draft | owner: agent-id_
 
 | Version | Date | Change |
 |---------|------|--------|
-| 1.0 | 2026-05-11 | Initial draft |
+| 0.1 | 2026-05-11 | Initial draft |

@@ -1,36 +1,29 @@
 # Roadmap
 
-## Phase 0 — Scaffold
-- [x] Create repo
-- [x] Define folder structure
-- [x] Write README
-- [x] Seed specs, harnesses, skills, schemas, examples, and docs
+## Phase 1 — Foundation
+- [x] Create README
+- [x] Draft SPEC-001 core architecture
+- [x] Define starter schemas
+- [x] Add starter harness and skill examples
 
-## Phase 1 — Core Specs
-- [ ] SPEC-001: Core Architecture
-- [ ] SPEC-002: Boot Files
-- [ ] SPEC-003: Skill System
-- [ ] SPEC-004: Memory Layer
-- [ ] SPEC-005: Communication Surfaces
-- [ ] SPEC-006: Permissions and Audit
+## Phase 2 — Core Specs
+- [x] Draft SPEC-002 boot files
+- [x] Draft SPEC-003 skill system
+- [x] Draft SPEC-004 memory layer
+- [x] Draft SPEC-005 communication surfaces
+- [x] Draft SPEC-006 permissions and audit
 
-## Phase 2 — Schemas
-- [ ] harness.schema.json
-- [ ] skill.schema.json
-- [ ] memory.schema.json
-- [ ] bulletin.schema.json
-- [ ] message.schema.json
+## Phase 3 — Reference Patterns
+- [x] Add repo-copilot team harness example
+- [ ] Add small business minimum viable harness example
+- [ ] Add admin harness example
 
-## Phase 3 — Reference Harnesses
-- [ ] Brainstorm Read-Only Harness
-- [ ] Builder Agent Harness
-- [ ] Reviewer Agent Harness
+## Phase 4 — Schema Hardening
+- [ ] Expand harness schema validation rules
+- [ ] Add example JSON instances
+- [ ] Add future base-communication schema
 
-## Phase 4 — Reference Implementations
-- [ ] repo-copilot pattern
-- [ ] live-feed-kernel pattern
-
-## Phase 5 — Productization
-- [ ] Define service model
-- [ ] Define small business use cases
-- [ ] Define implementation guide for human collaborators
+## Phase 5 — Implementation Notes
+- [ ] Add parser implementation notes
+- [ ] Add validation workflow notes
+- [ ] Add migration/versioning strategy
