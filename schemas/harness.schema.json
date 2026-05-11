@@ -45,6 +45,10 @@
       "type": "array",
       "items": { "type": "string" }
     },
+    "parent_harness": {
+      "type": ["string", "null"],
+      "description": "agent-harness only: optional path to parent team harness. Omit or set null for reusable/generic child harnesses. The team harness children[] list is always canonical."
+    },
     "shared_memory": {
       "type": "string",
       "description": "team-harness only: path to shared memory file"
@@ -53,10 +57,19 @@
       "type": "string",
       "description": "team-harness only: path to shared bulletin surface"
     },
+    "memory_steward": {
+      "type": "string",
+      "description": "team-harness only: agent ID responsible for writing shared memory. Default is the orchestration agent. Other agents propose updates but do not write directly."
+    },
     "children": {
       "type": "array",
       "items": { "type": "string" },
-      "description": "team-harness only: paths to child agent harness files"
+      "description": "team-harness only: paths to child agent harness files. This list is the canonical source of team membership."
+    },
+    "activation_order": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "team-harness only: advisory v1 order for activating child agents (human-executed). Executable orchestration deferred to v2. Typical default: brainstorm → builder → reviewer → ops."
     }
   }
 }
