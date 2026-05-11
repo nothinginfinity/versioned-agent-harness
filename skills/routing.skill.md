@@ -1,7 +1,20 @@
-## Skill: Routing
-*version: 0.1 | status: draft*
-
 ---
+id: routing
+version: 0.1
+status: draft
+owner: alice
+triggers:
+  - route this
+  - who should handle this
+  - send this to
+  - create a bulletin
+  - create an inbox message
+outputs:
+  - routed-message
+  - bulletin-entry
+---
+
+# Skill: Routing
 
 ## Purpose
 Route work to the correct agent, inbox, spec, or bulletin surface.
@@ -9,12 +22,7 @@ Route work to the correct agent, inbox, spec, or bulletin surface.
 ---
 
 ## Trigger Conditions
-Load this skill when the task includes:
-- route this
-- who should handle this
-- send this to
-- create a bulletin
-- create an inbox message
+Load this skill when the task includes any phrase listed in the frontmatter `triggers` field.
 
 ---
 

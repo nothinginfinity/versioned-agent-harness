@@ -2,12 +2,20 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "harness.schema.json",
   "title": "Harness",
-  "description": "Metadata for a version-controlled LLM agent harness",
+  "description": "Metadata for a version-controlled LLM agent harness. Supports both flat agent harnesses and team harnesses with child references.",
   "type": "object",
-  "required": ["id", "version", "mode", "status", "agent_role"],
+  "required": ["id", "version", "type", "mode", "status", "agent_role"],
   "properties": {
-    "id": { "type": "string" },
+    "id": {
+      "type": "string",
+      "description": "Unique harness identifier (slug format)"
+    },
     "version": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": ["agent-harness", "team-harness"],
+      "description": "agent-harness = single agent; team-harness = parent with child harness references"
+    },
     "mode": {
       "type": "string",
       "enum": ["read-only", "draft-only", "write-capable", "admin"]
@@ -17,6 +25,10 @@
       "enum": ["draft", "active", "deprecated"]
     },
     "agent_role": { "type": "string" },
+    "current_phase": {
+      "type": "string",
+      "description": "Required for active project harnesses. Optional for generic templates. Example: 'Phase 1 — Core Specs'"
+    },
     "startup_reads": {
       "type": "array",
       "items": { "type": "string" }
@@ -32,6 +44,19 @@
     "communication_surfaces": {
       "type": "array",
       "items": { "type": "string" }
+    },
+    "shared_memory": {
+      "type": "string",
+      "description": "team-harness only: path to shared memory file"
+    },
+    "shared_bulletin": {
+      "type": "string",
+      "description": "team-harness only: path to shared bulletin surface"
+    },
+    "children": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "team-harness only: paths to child agent harness files"
     }
   }
 }

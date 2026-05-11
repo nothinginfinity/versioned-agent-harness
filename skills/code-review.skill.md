@@ -1,7 +1,19 @@
-## Skill: Code Review
-*version: 0.1 | status: draft*
-
 ---
+id: code-review
+version: 0.1
+status: draft
+owner: alice
+triggers:
+  - review code
+  - check this PR
+  - audit this
+  - inspect the diff
+  - find risks
+outputs:
+  - review-report
+---
+
+# Skill: Code Review
 
 ## Purpose
 Review code, specs, or diffs for correctness, maintainability, and risk.
@@ -9,12 +21,7 @@ Review code, specs, or diffs for correctness, maintainability, and risk.
 ---
 
 ## Trigger Conditions
-Load this skill when the task includes:
-- review code
-- check this PR
-- audit this
-- inspect the diff
-- find risks
+Load this skill when the task includes any phrase listed in the frontmatter `triggers` field.
 
 ---
 
