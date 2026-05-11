@@ -1,5 +1,5 @@
 ## SPEC-001 — Core Architecture
-*version: 1.1 | status: draft | owner: alice | date: 2026-05-11*
+*version: 1.2 | status: draft | owner: alice | date: 2026-05-11*
 
 ---
 
@@ -80,6 +80,8 @@ children:
   - harnesses/reviewer-agent.harness.md
   - harnesses/brainstorm-readonly.harness.md
 ```
+
+See `harnesses/repo-copilot-team.harness.md` for the first real reference implementation of this model.
 
 **v1 policy:** Schema supports parent/child references. Execution remains flat. Nested orchestration deferred to v2.
 
@@ -173,7 +175,8 @@ Stored under `harnesses/admin/` in the same repo for v1. Separate repo only when
 | T-005 | Define audit and permission model | alice | pending |
 | T-006 | Add team-harness type to harness.schema.json | alice | done |
 | T-007 | Update skill files with YAML frontmatter | alice | done |
-| T-008 | Create harnesses/admin/ folder | alice | pending |
+| T-008 | Create harnesses/admin/ folder | alice | done |
+| T-009 | Create repo-copilot-team.harness.md reference example | alice | done |
 
 ---
 
@@ -196,3 +199,4 @@ Stored under `harnesses/admin/` in the same repo for v1. Separate repo only when
 |---------|------|--------|
 | 1.0 | 2026-05-11 | Initial draft |
 | 1.1 | 2026-05-11 | Resolved Q-001 through Q-006; added team harness model, skill frontmatter spec, boot phase field rule, MVH definition, bulletin/message separation rationale, admin harness placement |
+| 1.2 | 2026-05-11 | Marked T-008 done; added T-009 (repo-copilot-team reference example, done); added SPEC-001 cross-reference to harnesses/repo-copilot-team.harness.md |
