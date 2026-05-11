@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "bulletin.schema.json",
+  "title": "BulletinEntry",
+  "description": "A short delta-feed entry for a read-only or observer agent",
+  "type": "object",
+  "required": ["id", "from", "date", "status", "priority", "ref", "subject", "body"],
+  "properties": {
+    "id": { "type": "string" },
+    "from": { "type": "string" },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["unread", "acknowledged"]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "normal", "high", "blocking"]
+    },
+    "ref": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Full repo paths to relevant files"
+    },
+    "subject": { "type": "string" },
+    "body": { "type": "string" }
+  }
+}

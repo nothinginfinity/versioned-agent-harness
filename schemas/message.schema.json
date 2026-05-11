@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "message.schema.json",
+  "title": "Message",
+  "description": "Structured message between humans and harnessed agents",
+  "type": "object",
+  "required": ["id", "from", "to", "date", "status", "subject", "body"],
+  "properties": {
+    "id": { "type": "string" },
+    "from": { "type": "string" },
+    "to": { "type": "string" },
+    "date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["unread", "read", "acknowledged", "closed"]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["low", "normal", "high", "blocking"]
+    },
+    "ref": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "subject": { "type": "string" },
+    "body": { "type": "string" }
+  }
+}
