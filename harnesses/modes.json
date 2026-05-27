@@ -1,0 +1,116 @@
+{
+  "schema_version": "0.1",
+  "description": "AFO agent boot mode routing manifest. Read live by afo-agent-boot-gateway-mcp. Edit this file to add/update modes without redeploying the gateway.",
+  "modes": [
+    {
+      "mode": "mcp-builder",
+      "aliases": ["build mcp", "mcp", "afo mcp", "build worker"],
+      "default_agent": "alice",
+      "boot_command": "boot-mcp",
+      "project": "afo-mcp-builder",
+      "tool_belts": ["message-os-cloud-social-builder-belt"],
+      "context_sources": ["bulletins", "handoffs", "specs"],
+      "first_action": "Read the latest bulletin and handoffs addressed to Alice, then ask Jared what MCP to build next."
+    },
+    {
+      "mode": "social-builder",
+      "aliases": ["social", "message os", "social mvp", "cloud social"],
+      "default_agent": "alice",
+      "boot_command": "boot-social",
+      "project": "message-os-cloud-social-mvp",
+      "tool_belts": ["message-os-cloud-social-builder-belt"],
+      "context_sources": ["bulletins", "handoffs", "specs"],
+      "first_action": "Review the Message OS Cloud Social MVP v0.3 spec and current handoffs, then identify the next build task."
+    },
+    {
+      "mode": "toolsmith-builder",
+      "aliases": ["toolsmith", "build tools", "automatic app builder", "app builder"],
+      "default_agent": "chatgpt",
+      "boot_command": "boot-toolsmith",
+      "project": "toolsmith-automatic-application-builder",
+      "tool_belts": ["toolsmith-builder-belt"],
+      "context_sources": ["bulletins", "handoffs", "specs"],
+      "first_action": "Review the active Toolsmith builder queue and ask Jared what to build next."
+    },
+    {
+      "mode": "cloudflare-deploy",
+      "aliases": ["deploy", "worker deploy", "cloudflare", "cf deploy"],
+      "default_agent": "claude",
+      "boot_command": "boot-deploy",
+      "project": "",
+      "tool_belts": ["cloudflare-deploy-belt"],
+      "context_sources": ["handoffs", "deploy-notes"],
+      "first_action": "Identify the worker name, source path, bindings, and domain from the latest handoff, then ask Jared for deployment confirmation."
+    },
+    {
+      "mode": "d1-ops",
+      "aliases": ["d1", "database", "d1 migration", "db ops"],
+      "default_agent": "claude",
+      "boot_command": "boot-d1",
+      "project": "",
+      "tool_belts": ["cloudflare-deploy-belt"],
+      "context_sources": ["handoffs", "specs"],
+      "first_action": "Identify the D1 database, migration file, and binding targets from the latest handoff."
+    },
+    {
+      "mode": "debug",
+      "aliases": ["debugger", "fix bug", "troubleshoot", "ops debug"],
+      "default_agent": "claude",
+      "boot_command": "boot-debug",
+      "project": "",
+      "tool_belts": [],
+      "context_sources": ["handoffs", "bulletins"],
+      "first_action": "Load the error report or failing smoke test from the latest handoff and begin root cause analysis."
+    },
+    {
+      "mode": "roadmap",
+      "aliases": ["planning", "roadmap planning", "plan"],
+      "default_agent": "chatgpt",
+      "boot_command": "boot-roadmap",
+      "project": "",
+      "tool_belts": [],
+      "context_sources": ["bulletins", "handoffs", "specs"],
+      "first_action": "Review the current bulletin and all open handoffs, then produce a prioritized roadmap for Jared's review."
+    },
+    {
+      "mode": "spec-authoring",
+      "aliases": ["spec", "write spec", "draft spec", "spec writer"],
+      "default_agent": "chatgpt",
+      "boot_command": "boot-spec",
+      "project": "",
+      "tool_belts": [],
+      "context_sources": ["bulletins", "handoffs", "specs"],
+      "first_action": "Identify the spec to write from the latest handoff or bulletin, then draft the v0.1 spec for Jared's review."
+    },
+    {
+      "mode": "handoff",
+      "aliases": ["send handoff", "write handoff", "cross-agent message"],
+      "default_agent": "chatgpt",
+      "boot_command": "boot-handoff",
+      "project": "",
+      "tool_belts": [],
+      "context_sources": ["bulletins", "handoffs"],
+      "first_action": "Identify the recipient agent and context from Jared's request, then compose and commit the handoff message."
+    },
+    {
+      "mode": "validation",
+      "aliases": ["validate", "review spec", "spec review", "schema check"],
+      "default_agent": "chatgpt",
+      "boot_command": "boot-validate",
+      "project": "",
+      "tool_belts": [],
+      "context_sources": ["specs", "handoffs"],
+      "first_action": "Load the spec or schema under review from the latest handoff and produce a structured validation report."
+    },
+    {
+      "mode": "research",
+      "aliases": ["research mode", "investigate", "look up"],
+      "default_agent": "alice",
+      "boot_command": "boot-research",
+      "project": "",
+      "tool_belts": [],
+      "context_sources": ["bulletins", "handoffs"],
+      "first_action": "Identify the research question from the latest handoff or bulletin, then begin investigation and report findings."
+    }
+  ]
+}
